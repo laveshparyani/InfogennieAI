@@ -1,67 +1,66 @@
 # InfogennieAI
 
-A modern data analytics platform that helps users analyze and visualize their data with ease.
+A modern, AI-powered business intelligence platform to analyze and visualize your data with ease. Now featuring a fully redesigned, enterprise-ready UI with beautiful, responsive pages and seamless authentication.
 
 ## Project Structure
 
 ```
 src/
-├── components/     # Reusable UI components
-├── pages/         # Page components
-├── assets/        # Static assets (images, fonts, etc.)
-├── styles/        # Global styles and Tailwind configuration
-├── utils/         # Utility functions
-├── hooks/         # Custom React hooks
-├── context/       # React context providers
-└── services/      # API services and external integrations
+├── components/     # Reusable UI components (e.g., Navbar)
+├── pages/          # Page components (Home, Login, Register)
+├── assets/         # Static assets (images, fonts, etc.)
+├── styles/         # Global styles and Tailwind configuration
+├── utils/          # Utility functions
+├── hooks/          # Custom React hooks
+├── context/        # React context providers
+└── services/       # API services and external integrations
 ```
 
 ## Tech Stack
 
-- Frontend:
+- **Frontend:**
   - React
   - Tailwind CSS
-  - HTML/CSS/JavaScript
+  - Framer Motion (for animations)
   - React Router
-
-- Backend (to be implemented):
-  - Django
-  - Node.js
+- **Backend (to be implemented):**
+  - Django or Node.js
   - SQL Database
 
 ## Getting Started
 
-1. Install dependencies:
-```bash
-npm install
-```
-
-2. Start the development server:
-```bash
-npm start
-```
-
-3. Build for production:
-```bash
-npm run build
-```
+1. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+2. **Start the development server:**
+   ```bash
+   npm start
+   ```
+3. **Build for production:**
+   ```bash
+   npm run build
+   ```
 
 ## Features
 
-- User authentication
-- Data visualization
-- Power BI integration
-- Real-time analytics
-- Custom reports
-- Data import/export
+- Modern, animated landing page
+- User authentication (Login & Register) with beautiful, glassmorphic UI
+- Data visualization and analytics preview (on Home page)
+- Responsive design for all devices
+- Real-time analytics (UI preview)
+- Custom reports (UI preview)
+- Data import/export (UI preview)
+
+> **Note:** The Dashboard page and route have been removed for a cleaner, more focused experience. All analytics previews are now part of the Home page. Backend/API integration is planned for future releases.
 
 ## Development Guidelines
 
-1. Follow the component structure in `src/components`
-2. Use Tailwind CSS for styling
-3. Implement responsive design
-4. Follow React best practices
-5. Document code with comments
+1. Use the component structure in `src/components`
+2. Style with Tailwind CSS and follow the design system
+3. Implement responsive design and accessibility best practices
+4. Use Framer Motion for smooth UI animations
+5. Follow React best practices and document code with comments
 
 ## Backend Integration
 
