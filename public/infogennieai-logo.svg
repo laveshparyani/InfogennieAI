@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="infogennieai-blue" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2563eb"/>
+      <stop offset="1" stop-color="#6366f1"/>
+    </linearGradient>
+  </defs>
+  <rect x="4" y="4" width="56" height="56" rx="14" fill="url(#infogennieai-blue)"/>
+  <text x="50%" y="54%" text-anchor="middle" fill="white" font-size="32" font-family="'Inter', 'Segoe UI', Arial, sans-serif" font-weight="bold" dominant-baseline="middle">I</text>
+</svg> 
