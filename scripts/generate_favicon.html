@@ -2,30 +2,55 @@
 <html>
 <head>
     <title>Favicon Generator</title>
+    <style>
+        body { padding: 20px; font-family: Arial, sans-serif; }
+        canvas { border: 1px solid #ccc; margin: 10px; }
+        #download { 
+            display: inline-block;
+            padding: 10px 20px;
+            background: #4F46E5;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 10px;
+        }
+    </style>
 </head>
 <body>
-    <canvas id="favicon" width="64" height="64"></canvas>
-    <a id="download" download="favicon.ico">Download Favicon</a>
+    <div id="canvases"></div>
+    <a id="download" download="favicon.png">Download Favicon</a>
     <script>
-        const canvas = document.getElementById('favicon');
-        const ctx = canvas.getContext('2d');
+        const sizes = [16, 32, 48, 64];
+        const canvasesDiv = document.getElementById('canvases');
+        
+        // Create canvases for each size
+        sizes.forEach(size => {
+            const canvas = document.createElement('canvas');
+            canvas.width = size;
+            canvas.height = size;
+            canvas.title = `${size}x${size}`;
+            canvasesDiv.appendChild(canvas);
+            
+            const ctx = canvas.getContext('2d');
+            
+            // Draw background
+            ctx.fillStyle = '#4F46E5';
+            ctx.beginPath();
+            ctx.roundRect(0, 0, size, size, size * 0.25); // Scale corner radius with size
+            ctx.fill();
+            
+            // Draw text
+            ctx.fillStyle = 'white';
+            ctx.font = `bold ${size * 0.625}px Arial`; // Scale font size with canvas
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('I', size/2, size/2);
+        });
 
-        // Draw background
-        ctx.fillStyle = '#4F46E5';
-        ctx.beginPath();
-        ctx.roundRect(0, 0, 64, 64, 16);
-        ctx.fill();
-
-        // Draw text
-        ctx.fillStyle = 'white';
-        ctx.font = 'bold 40px Arial';
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.fillText('I', 32, 32);
-
-        // Set up download
+        // Use the largest size for the download
+        const mainCanvas = document.querySelector('canvas:last-child');
         const download = document.getElementById('download');
-        download.href = canvas.toDataURL('image/png');
+        download.href = mainCanvas.toDataURL('image/png');
     </script>
 </body>
 </html> 
