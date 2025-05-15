@@ -4,6 +4,7 @@ import {
   FaLayerGroup, FaBroom, FaLink, FaBalanceScale, FaFilter, FaExchangeAlt, FaCodeBranch, FaSlidersH, FaChartBar, FaThLarge, FaFire, FaLightbulb, FaListOl, FaMobileAlt, FaTrophy, FaDatabase, FaMagic, FaTable, FaFont, FaChevronLeft, FaChevronRight
 } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
+import GraphGenerator from '../components/GraphGenerator/GraphGenerator';
 
 const featuresList = [
   { key: 'aggregation', name: 'Aggregation & Summarization', icon: <FaLayerGroup /> },
@@ -52,27 +53,14 @@ const featureDescriptions = {
 function FeatureContent({ selected }) {
   if (selected === 'graph-generation') {
     return (
-      <div>
+      <div className="h-full overflow-y-auto">
         <h1 className="text-4xl font-bold text-blue-700 mb-2 flex items-center gap-3">
           <FaChartBar className="text-3xl" /> Graph Generation
         </h1>
         <p className="text-lg text-gray-700 mb-6">
           Automatically generate insightful graphs and visualizations.
         </p>
-        <ul className="list-disc pl-6 mb-6 text-gray-700">
-          <li>Generate a graph of sales vs year. Sales on Y axis, Year on X axis.</li>
-          <li>Generate a gauge graph of total sales made.</li>
-          <li>Generate a sales graph with filters for Sales and Year.</li>
-        </ul>
-        <div className="rounded-xl bg-gradient-to-br from-blue-400 via-blue-200 to-blue-100 border border-blue-200 p-6 mb-6">
-          <div className="font-semibold text-blue-800 mb-2">Demo: Sales vs Year</div>
-          <div className="w-full h-64 flex items-center justify-center">
-            <img src="/sample-graph.png" alt="Graph Demo" className="max-h-full max-w-full rounded-lg shadow" />
-          </div>
-        </div>
-        <div className="rounded-xl bg-blue-50 border border-blue-100 p-6 text-blue-900 shadow-inner">
-          <span className="font-semibold">100+ types of graph generation and graphing libraries of your choice (D3.js, Chart.js, and more).</span>
-        </div>
+        <GraphGenerator />
       </div>
     );
   }

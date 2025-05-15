@@ -1,0 +1,31 @@
+Date,Product,Category,Sales,Quantity,Region
+2023-01-15,Laptop,Electronics,1299.99,5,North
+2023-01-16,Smartphone,Electronics,899.99,8,South
+2023-01-17,Headphones,Electronics,149.99,15,East
+2023-01-18,Coffee Maker,Appliances,79.99,12,West
+2023-01-19,Tablet,Electronics,599.99,6,North
+2023-01-20,Blender,Appliances,129.99,10,South
+2023-01-21,Smart Watch,Electronics,299.99,7,East
+2023-01-22,Microwave,Appliances,199.99,4,West
+2023-01-23,Gaming Console,Electronics,499.99,3,North
+2023-01-24,TV,Electronics,899.99,2,South
+2023-01-25,Printer,Electronics,299.99,5,East
+2023-01-26,Refrigerator,Appliances,1499.99,1,West
+2023-01-27,Camera,Electronics,699.99,4,North
+2023-01-28,Air Fryer,Appliances,149.99,8,South
+2023-01-29,Speaker,Electronics,249.99,6,East
+2023-01-30,Dishwasher,Appliances,899.99,2,West
+2023-01-31,Monitor,Electronics,399.99,7,North
+2023-02-01,Vacuum,Appliances,299.99,5,South
+2023-02-02,Keyboard,Electronics,99.99,12,East
+2023-02-03,Toaster,Appliances,49.99,15,West
+2023-02-04,Mouse,Electronics,59.99,20,North
+2023-02-05,Food Processor,Appliances,179.99,6,South
+2023-02-06,External Drive,Electronics,129.99,9,East
+2023-02-07,Rice Cooker,Appliances,89.99,8,West
+2023-02-08,Router,Electronics,159.99,5,North
+2023-02-09,Mixer,Appliances,169.99,4,South
+2023-02-10,Webcam,Electronics,79.99,11,East
+2023-02-11,Air Conditioner,Appliances,599.99,3,West
+2023-02-12,Power Bank,Electronics,49.99,25,North
+2023-02-13,Water Heater,Appliances,299.99,4,South 
