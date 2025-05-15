@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Favicon Generator</title>
+</head>
+<body>
+    <canvas id="favicon" width="64" height="64"></canvas>
+    <a id="download" download="favicon.ico">Download Favicon</a>
+    <script>
+        const canvas = document.getElementById('favicon');
+        const ctx = canvas.getContext('2d');
+
+        // Draw background
+        ctx.fillStyle = '#4F46E5';
+        ctx.beginPath();
+        ctx.roundRect(0, 0, 64, 64, 16);
+        ctx.fill();
+
+        // Draw text
+        ctx.fillStyle = 'white';
+        ctx.font = 'bold 40px Arial';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('I', 32, 32);
+
+        // Set up download
+        const download = document.getElementById('download');
+        download.href = canvas.toDataURL('image/png');
+    </script>
+</body>
+</html> 
