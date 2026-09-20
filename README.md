@@ -2,6 +2,10 @@
 
 InfogennieAI is a powerful data analytics platform that helps users visualize and analyze their data through various interactive charts and graphs.
 
+**Live demo:** https://infogennie-ai.vercel.app/
+
+Graph generation runs entirely in the browser (parsing and charting happen client-side with Papa Parse, SheetJS, and Plotly), so the live demo works with no backend. A Django REST backend is included in `backend/` as an optional reference implementation.
+
 ## Features
 
 ### Graph Generation
@@ -53,7 +57,11 @@ InfogennieAI is a powerful data analytics platform that helps users visualize an
 - pip (Python package manager)
 - Git
 
-### Backend Setup
+### Backend Setup (optional)
+
+The frontend generates graphs client-side, so the backend is **not required** to run the app. These
+steps are only needed if you want to run the reference Django API.
+
 1. Navigate to the backend directory:
 ```bash
 cd backend
@@ -80,23 +88,22 @@ python manage.py migrate
 python manage.py runserver 8080
 ```
 
-### Frontend Setup
-1. Navigate to the frontend directory:
-```bash
-cd frontend
-```
-
-2. Install dependencies:
+### Frontend Setup (the app)
+1. From the repository root, install dependencies:
 ```bash
 npm install
 ```
 
-3. Start the development server:
+2. Start the development server:
 ```bash
 npm start
 ```
 
-The application will be available at `http://localhost:3000`
+The application will be available at `http://localhost:3000`. Open **Features > Graph Generation**,
+upload a CSV/XLSX/JSON file, pick a chart type, and click **Generate Graph**.
+
+> Build note: this is a Create React App project and CI builds treat ESLint warnings as errors, so
+> keep `npm run build` warning-free.
 
 ## Usage
 
@@ -130,16 +137,19 @@ The application will be available at `http://localhost:3000`
 
 ## Contributing
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+InfogennieAI is a proprietary portfolio project, so it is not open for external code contributions
+or redistribution. Bug reports and suggestions are welcome via GitHub issues. See
+[CONTRIBUTING](.github/CONTRIBUTING.md) for details.
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+**Proprietary - all rights reserved.** This project was built from scratch by Lavesh Paryani and is
+published for portfolio and evaluation purposes only. You may view the source, but you may not use,
+copy, modify, redistribute, or sell it without prior written permission. See the [LICENSE](LICENSE)
+file for the full terms.
 
 ## Support
 
-For support, please open an issue in the GitHub repository or contact the development team. 
+For questions, open an issue in the GitHub repository. For security reports, follow
+[SECURITY.md](.github/SECURITY.md). For licensing or permission requests, contact the author via
+[GitHub](https://github.com/laveshparyani).
