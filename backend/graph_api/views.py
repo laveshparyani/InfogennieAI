@@ -1,11 +1,14 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
+import logging
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 import json
 from datetime import datetime
+
+logger = logging.getLogger(__name__)
 
 @api_view(['POST'])
 def generate_graph(request):
@@ -94,9 +97,10 @@ def generate_graph(request):
             'message': 'Graph generated successfully'
         })
 
-    except Exception as e:
-        print("Error:", str(e))
+    except Exception:
+        # Log the full error server-side, but do not leak exception details to the client.
+        logger.exception("Error generating graph")
         return Response({
             'success': False,
-            'error': str(e)
-        }, status=status.HTTP_400_BAD_REQUEST) 
+            'error': 'Failed to generate graph. Please check your data and try again.'
+        }, status=status.HTTP_400_BAD_REQUEST)

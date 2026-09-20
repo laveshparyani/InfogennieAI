@@ -1,10 +1,13 @@
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
+import logging
 import json
 import pandas as pd
 import numpy as np
 from .graph_utils import generate_graph_data
+
+logger = logging.getLogger(__name__)
 
 @csrf_exempt
 @require_http_methods(["POST"])
@@ -27,7 +30,9 @@ def generate_graph(request):
         
         return JsonResponse(graph_data)
     
-    except Exception as e:
+    except Exception:
+        # Log the full error server-side, but do not leak exception details to the client.
+        logger.exception("Error generating graph")
         return JsonResponse({
-            'error': str(e)
+            'error': 'Failed to generate graph.'
         }, status=500) 
