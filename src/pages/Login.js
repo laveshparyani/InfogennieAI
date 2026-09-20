@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { FaUserCircle } from 'react-icons/fa';
 import Navbar from '../components/Navbar';
 
 const Login = () => {
@@ -89,9 +88,9 @@ const Login = () => {
                   </label>
                 </div>
                 <div className="text-sm">
-                  <a href="#" className="font-medium text-blue-600 hover:text-indigo-700 transition-colors">
+                  <button type="button" className="font-medium text-blue-600 hover:text-indigo-700 transition-colors bg-transparent border-0 p-0 cursor-pointer">
                     Forgot your password?
-                  </a>
+                  </button>
                 </div>
               </div>
               <motion.button

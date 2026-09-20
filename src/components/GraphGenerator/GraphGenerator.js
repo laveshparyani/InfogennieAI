@@ -110,37 +110,131 @@ const GraphGenerator = () => {
     }
   };
 
-  const generateGraph = async (data, type) => {
-    try {
-      console.log('Data being sent to backend:', {
-        data: data.slice(0, 100),
-        type,
-        columns: Object.keys(data[0])
+  // Build a Plotly figure entirely in the browser from the uploaded rows.
+  // This keeps the app fully static (works on Vercel with no backend). The
+  // Django backend in /backend remains as a reference implementation.
+  const generateGraph = (rows, type) => {
+    if (!Array.isArray(rows) || rows.length === 0) {
+      throw new Error('No data to plot. Please upload a file first.');
+    }
+
+    const toNum = (v) => {
+      const n = Number(v);
+      return Number.isNaN(n) ? null : n;
+    };
+    const uniq = (arr) => [...new Set(arr)];
+
+    const columns = Object.keys(rows[0] || {});
+    const numericCols = columns.filter((c) => {
+      const vals = rows.map((r) => r[c]).filter((v) => v !== '' && v !== null && v !== undefined);
+      return vals.length > 0 && vals.every((v) => !Number.isNaN(Number(v)));
+    });
+    const categoricalCols = columns.filter((c) => !numericCols.includes(c));
+
+    if (numericCols.length === 0) {
+      throw new Error('No numeric column found. Please include at least one numeric column.');
+    }
+
+    const xKey = columns.find((c) => /date|time|year|month/i.test(c)) || categoricalCols[0] || columns[0];
+    const yKey =
+      numericCols.find((c) => /sales|revenue|amount|value|total|price/i.test(c)) ||
+      numericCols.find((c) => c !== xKey) ||
+      numericCols[0];
+    const colorKey = categoricalCols.find((c) => c !== xKey);
+    const sizeKey =
+      numericCols.find((c) => /quantity|qty|size|count|volume/i.test(c) && c !== yKey) ||
+      numericCols.find((c) => c !== yKey);
+
+    const groups = colorKey ? uniq(rows.map((r) => r[colorKey])) : [null];
+    const rowsFor = (g) => (g === null ? rows : rows.filter((r) => r[colorKey] === g));
+    const nameFor = (g) => (g === null ? yKey : String(g));
+
+    const xyTraces = (mode, extra = {}) =>
+      groups.map((g) => {
+        const rs = rowsFor(g);
+        return {
+          type: 'scatter',
+          mode,
+          name: nameFor(g),
+          x: rs.map((r) => r[xKey]),
+          y: rs.map((r) => toNum(r[yKey])),
+          ...extra,
+        };
       });
 
-      const response = await fetch('http://localhost:8080/graph/generate', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ 
-          data: data.slice(0, 100),
-          type,
-          columns: Object.keys(data[0])
-        }),
-      });
-      
-      if (!response.ok) {
-        const errorData = await response.json();
-        console.log('Error response from backend:', errorData);
-        throw new Error(errorData.error || 'Failed to generate graph');
-      }
-      
-      const result = await response.json();
-      return result.graph;
-    } catch (error) {
-      throw new Error('Error generating graph: ' + error.message);
+    // Aggregate y by category for pie/doughnut/polar/radar
+    const catKey = colorKey || xKey;
+    const totals = {};
+    rows.forEach((r) => {
+      const k = r[catKey];
+      totals[k] = (totals[k] || 0) + (toNum(r[yKey]) || 0);
+    });
+    const labels = Object.keys(totals);
+    const values = Object.values(totals);
+
+    let data;
+    let layout = { title: '', autosize: true };
+    const axisLayout = { xaxis: { title: xKey }, yaxis: { title: yKey } };
+
+    switch (type) {
+      case 'bar':
+        data = groups.map((g) => {
+          const rs = rowsFor(g);
+          return { type: 'bar', name: nameFor(g), x: rs.map((r) => r[xKey]), y: rs.map((r) => toNum(r[yKey])) };
+        });
+        layout = { ...layout, ...axisLayout, barmode: 'group', title: `${yKey} by ${xKey}` };
+        break;
+      case 'area':
+        data = xyTraces('lines', { fill: 'tozeroy' });
+        layout = { ...layout, ...axisLayout, title: `${yKey} over ${xKey}` };
+        break;
+      case 'scatter':
+        data = xyTraces('markers');
+        layout = { ...layout, ...axisLayout, title: `${yKey} vs ${xKey}` };
+        break;
+      case 'bubble':
+        data = groups.map((g) => {
+          const rs = rowsFor(g);
+          return {
+            type: 'scatter',
+            mode: 'markers',
+            name: nameFor(g),
+            x: rs.map((r) => r[xKey]),
+            y: rs.map((r) => toNum(r[yKey])),
+            marker: {
+              size: rs.map((r) => (sizeKey ? Math.abs(toNum(r[sizeKey]) || 0) : 10)),
+              sizemode: 'area',
+              sizeref: sizeKey ? Math.max(...rows.map((r) => Math.abs(toNum(r[sizeKey]) || 0)), 1) / 900 : 1,
+              sizemin: 4,
+            },
+          };
+        });
+        layout = { ...layout, ...axisLayout, title: `${yKey} vs ${xKey}${sizeKey ? ` (size: ${sizeKey})` : ''}` };
+        break;
+      case 'pie':
+        data = [{ type: 'pie', labels, values }];
+        layout = { ...layout, title: `${yKey} by ${catKey}` };
+        break;
+      case 'doughnut':
+        data = [{ type: 'pie', labels, values, hole: 0.5 }];
+        layout = { ...layout, title: `${yKey} by ${catKey}` };
+        break;
+      case 'radar':
+        data = [{ type: 'scatterpolar', r: values, theta: labels, fill: 'toself', name: yKey }];
+        layout = { ...layout, title: `${yKey} by ${catKey}`, polar: { radialaxis: { visible: true } } };
+        break;
+      case 'polar':
+        data = [{ type: 'barpolar', r: values, theta: labels }];
+        layout = { ...layout, title: `${yKey} by ${catKey}`, polar: { radialaxis: { visible: true } } };
+        break;
+      case 'line':
+      default:
+        data = xyTraces('lines');
+        layout = { ...layout, ...axisLayout, title: `${yKey} over ${xKey}` };
+        break;
     }
+
+    return { data, layout };
   };
 
   return (

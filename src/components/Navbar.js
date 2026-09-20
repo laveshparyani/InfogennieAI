@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaHome, FaStar, FaTags, FaInfoCircle, FaEnvelope, FaSignInAlt, FaUserPlus, FaChevronDown, FaNewspaper, FaBook, FaQuestionCircle, FaFileAlt } from 'react-icons/fa';
+import { FaHome, FaStar, FaTags, FaInfoCircle, FaEnvelope, FaSignInAlt, FaUserPlus, FaChevronDown } from 'react-icons/fa';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -17,15 +17,6 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const aboutDropdownItems = [
-    { name: 'About', path: '/about', icon: <FaInfoCircle className="mr-2 align-middle w-4 h-4" /> },
-    { name: 'Blog', path: '/blog', icon: <FaNewspaper className="mr-2 align-middle w-4 h-4" /> },
-    { name: 'Press', path: '/press', icon: <FaNewspaper className="mr-2 align-middle w-4 h-4" /> },
-    { name: 'Resources', path: '/resources', icon: <FaBook className="mr-2 align-middle w-4 h-4" /> },
-    { name: 'Documentation', path: '/docs', icon: <FaFileAlt className="mr-2 align-middle w-4 h-4" /> },
-    { name: 'Help Center', path: '/help', icon: <FaQuestionCircle className="mr-2 align-middle w-4 h-4" /> },
-    { name: 'Guides', path: '/guides', icon: <FaBook className="mr-2 align-middle w-4 h-4" /> },
-  ];
 
   const navLinks = [
     { name: 'Home', path: '/', icon: <FaHome className="mr-2 align-middle" /> },

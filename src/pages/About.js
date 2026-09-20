@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import {
   FaInfoCircle, FaNewspaper, FaBook, FaFileAlt, FaQuestionCircle, FaBookOpen, FaChevronLeft, FaChevronRight, FaStar, FaLightbulb
@@ -14,16 +15,6 @@ const aboutList = [
   { key: 'help', name: 'Help Center', icon: <FaQuestionCircle /> },
   { key: 'guides', name: 'Guides', icon: <FaBookOpen /> },
 ];
-
-const aboutDescriptions = {
-  about: 'Learn more about InfogennieAI, our mission, and our team.',
-  blog: 'Read the latest news, updates, and insights from our team.',
-  press: 'See our press releases and media coverage.',
-  resources: 'Access whitepapers, case studies, and other resources.',
-  docs: 'Browse our comprehensive documentation for developers and users.',
-  help: 'Get support, FAQs, and help articles in our Help Center.',
-  guides: 'Step-by-step guides to help you get the most out of InfogennieAI.',
-};
 
 function AboutContent({ selected }) {
   const item = aboutList.find(f => f.key === selected);
@@ -373,7 +364,7 @@ function AboutContent({ selected }) {
           {tabContent[tab].content}
         </motion.div>
         <div className="mt-6 flex justify-end">
-          <a href="#" className="px-6 py-2 rounded bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold hover:from-blue-700 hover:to-indigo-700 transition">Open Full Docs</a>
+          <Link to="/docs" className="px-6 py-2 rounded bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold hover:from-blue-700 hover:to-indigo-700 transition">Open Full Docs</Link>
         </div>
       </div>
     );

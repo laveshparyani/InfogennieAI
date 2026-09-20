@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import Marquee from 'react-fast-marquee';
 import CountUp from 'react-countup';
 import { motion } from 'framer-motion';
-import { FaCheckCircle, FaChartBar, FaBolt, FaRobot, FaUserFriends, FaSmile, FaDatabase, FaFileAlt, FaLock, FaPlayCircle, FaCalendarAlt, FaTwitter, FaLinkedin, FaGithub, FaInstagram } from 'react-icons/fa';
+import { FaCheckCircle, FaChartBar, FaBolt, FaRobot, FaPlayCircle, FaCalendarAlt, FaInstagram } from 'react-icons/fa';
 import { SiX } from 'react-icons/si';
 
 // Demo data for Stores Sales Trend

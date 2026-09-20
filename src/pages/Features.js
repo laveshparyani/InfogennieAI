@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 import {
-  FaLayerGroup, FaBroom, FaLink, FaBalanceScale, FaFilter, FaExchangeAlt, FaCodeBranch, FaSlidersH, FaChartBar, FaThLarge, FaFire, FaLightbulb, FaListOl, FaMobileAlt, FaTrophy, FaDatabase, FaMagic, FaTable, FaFont, FaChevronLeft, FaChevronRight
+  FaLayerGroup, FaBroom, FaLink, FaBalanceScale, FaFilter, FaExchangeAlt, FaCodeBranch, FaSlidersH, FaChartBar, FaFire, FaLightbulb, FaListOl, FaMobileAlt, FaTrophy, FaDatabase, FaMagic, FaTable, FaFont, FaChevronLeft, FaChevronRight
 } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 import GraphGenerator from '../components/GraphGenerator/GraphGenerator';

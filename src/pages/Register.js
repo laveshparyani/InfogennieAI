@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { FaUserPlus } from 'react-icons/fa';
 import Navbar from '../components/Navbar';
 
 const Register = () => {
