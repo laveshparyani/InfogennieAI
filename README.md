@@ -2,7 +2,7 @@
 
 InfogennieAI is a powerful data analytics platform that helps users visualize and analyze their data through various interactive charts and graphs.
 
-**Live demo:** _being redeployed under a new URL - link coming soon._
+**Live demo:** https://infogennie-ai-seven.vercel.app/
 
 Graph generation runs entirely in the browser (parsing and charting happen client-side with Papa Parse, SheetJS, and Plotly), so the live demo works with no backend. A Django REST backend is included in `backend/` as an optional reference implementation.
 
